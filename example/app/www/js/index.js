@@ -17,56 +17,54 @@
  * under the License.
  */
 var app = {
-    // Application Constructor
-    initialize: function() {
-        this.bindEvents();
-    },
-    // Bind Event Listeners
-    //
-    // Bind any events that are required on startup. Common events are:
-    // 'load', 'deviceready', 'offline', and 'online'.
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-    // deviceready Event Handler
-    //
-    // The scope of 'this' is the event. In order to call the 'receivedEvent'
-    // function, we must explicitly call 'app.receivedEvent(...);'
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
+  // Application Constructor
+  initialize: function () {
+    this.bindEvents();
+  },
+  // Bind Event Listeners
+  //
+  // Bind any events that are required on startup. Common events are:
+  // 'load', 'deviceready', 'offline', and 'online'.
+  bindEvents: function () {
+    document.addEventListener("deviceready", this.onDeviceReady, false);
+  },
+  // deviceready Event Handler
+  //
+  // The scope of 'this' is the event. In order to call the 'receivedEvent'
+  // function, we must explicitly call 'app.receivedEvent(...);'
+  onDeviceReady: function () {
+    app.receivedEvent("deviceready");
 
-        window.plugins.intent.getCordovaIntent(
-            function (Intent) {
-                var element = document.getElementById('intentStartup');
-                element.innerHTML = '<textarea>' + JSON.stringify(Intent) + '</textarea>';
-            },
-            function () {
-                console.log('Error getting cordova intent');
-            }
-        );
+    window.plugins.intent.getCordovaIntent(
+      function (Intent) {
+        var element = document.getElementById("intentStartup");
+        element.innerHTML =
+          "<textarea>" + JSON.stringify(Intent) + "</textarea>";
+      },
+      function () {
+        console.log("Error getting cordova intent");
+      },
+    );
 
-        window.plugins.intent.setNewIntentHandler(
-            function (Intent) {
-                var element = document.getElementById('intentReceiver');
-                var child = document.createElement('div');
-                child.innerHTML = '<textarea>' + JSON.stringify(Intent) + '</textarea>';
+    window.plugins.intent.setNewIntentHandler(function (Intent) {
+      var element = document.getElementById("intentReceiver");
+      var child = document.createElement("div");
+      child.innerHTML = "<textarea>" + JSON.stringify(Intent) + "</textarea>";
 
-                element.appendChild(child);
-            }
-        );
+      element.appendChild(child);
+    });
+  },
+  // Update DOM on a Received Event
+  receivedEvent: function (id) {
+    var parentElement = document.getElementById(id);
+    var listeningElement = parentElement.querySelector(".listening");
+    var receivedElement = parentElement.querySelector(".received");
 
-    },
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+    listeningElement.setAttribute("style", "display:none;");
+    receivedElement.setAttribute("style", "display:block;");
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
-
-        console.log('Received Event: ' + id);
-    }
+    console.log("Received Event: " + id);
+  },
 };
 
 app.initialize();

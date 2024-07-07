@@ -1,6 +1,6 @@
 # Cordova Plugin for accessing the Cordova Intent and handling onNewIntent (Android Only)
 
-__This plugin is not longer maintained.__
+**This plugin is not longer maintained.**
 
 This plugin allows you to add functionality for receiving content sent from other apps. To enable receiving sent content add the following XML to the MainActivity section of your AndroidManifest.xml
 
@@ -15,7 +15,7 @@ This plugin allows you to add functionality for receiving content sent from othe
 
 You can adjust the mime types your application accepts by defining them explicitly. The above example allows any mime type.
 
-The following example limits allowed mime types to JPG-Images. 
+The following example limits allowed mime types to JPG-Images.
 
 ```xml
 <intent-filter>
@@ -27,7 +27,7 @@ The following example limits allowed mime types to JPG-Images.
 ```
 
 If you do not want to handle multiple files at once, you can remove the following tag:
- 
+
 ```xml
 <action android:name="android.intent.action.SEND_MULTIPLE" />
 ```
@@ -59,35 +59,36 @@ end
 ### Note
 
 By default the launch mode of the MainActivity of cordova based applications is set to "singleTop". This is ok for most situations. However you may prefer having the launch mode set to "singleTask" instead. Please read this article to get an idea about the different launch modes: https://www.mobomo.com/2011/06/android-understanding-activity-launchmode/
- 
+
 Setting the launch mode to "singleTask" ensures that your app cannot run in multiple instances as it might happen if launch mode is set to "singleTop" for example if your application is already running and you try to share a webpage from the browser to it.
 
 #### Example of MainActivity section in AndroidManifest.xml
 
 ```xml
-<activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" 
-          android:label="@string/activity_name" 
-          android:launchMode="singleTask" 
-          android:name="MainActivity" 
-          android:theme="@android:style/Theme.Holo.Light" 
+<activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+          android:label="@string/activity_name"
+          android:launchMode="singleTask"
+          android:name="MainActivity"
+          android:theme="@android:style/Theme.Holo.Light"
           android:windowSoftInputMode="adjustResize">
-          
+
     <intent-filter android:label="@string/launcher_name">
         <action android:name="android.intent.action.MAIN" />
         <category android:name="android.intent.category.LAUNCHER" />
     </intent-filter>
-    
+
     <intent-filter>
         <action android:name="android.intent.action.SEND" />
         <action android:name="android.intent.action.SEND_MULTIPLE" />
         <category android:name="android.intent.category.DEFAULT" />
         <data android:mimeType="*/*" />
     </intent-filter>
-    
+
 </activity>
 ```
 
-Cordova >= 6.0.0 apparently requires the launchMode to be set in ``config.xml`` as well:
+Cordova >= 6.0.0 apparently requires the launchMode to be set in `config.xml` as well:
+
 ```xml
 <platform name="android">
     ...
@@ -113,16 +114,23 @@ phonegap local plugin add https://github.com/napolitano/cordova-plugin-intent
 
 ```js
 window.plugins.intent.setNewIntentHandler(function (intent) {
-    // Do things
+  // Do things
 });
 ```
 
 ```js
-window.plugins.intent.getCordovaIntent(function (intent) {}, function () {});
+window.plugins.intent.getCordovaIntent(
+  function (intent) {},
+  function () {},
+);
 ```
 
 ```js
-window.plugins.intent.getRealPathFromContentUrl(contentUrl, function (realPath) {}, function () {});
+window.plugins.intent.getRealPathFromContentUrl(
+  contentUrl,
+  function (realPath) {},
+  function () {},
+);
 ```
 
 ## Example Intent passed from plugin
@@ -160,21 +168,22 @@ While this example shows an JSON representation, you'll actually receive a ready
 ## Methods
 
 ### getCordovaIntent() - Android
+
 Get limited access to intent properties
 
 ### getRealPathFromContentUrl(contentUrl, successCallback, failureCallback) - Android
+
 Get the real path for the contentUrl
 
 ## Events
 
 ### setNewIntentHandler(method) - Android
-Method passed will be triggered on new intent. Provides limited access to the new intent. 
 
+Method passed will be triggered on new intent. Provides limited access to the new intent.
 
 ### Supported Platforms
 
 - Android (>= API Level 19 / Kitkat)
-
 
 ### Basic example
 
@@ -198,7 +207,7 @@ document.addEventListener('deviceReady', function(){
         'content://media/external/images/media/81',
         function (realPath) {
             console.log(realPath);
-        }, 
+        },
         function () {
             console.log('Error');
         }
@@ -218,14 +227,13 @@ document.addEventListener('deviceReady', function(){
 
 ## Limitations
 
-The plugin is a bare-bones implementation to help me with __my__ projects. The intent passed to JavaScript is not a complete serialized object. The code should receive some refactorings and would benefit from a better JSON library like gson or similar. Test would be nice too.
+The plugin is a bare-bones implementation to help me with **my** projects. The intent passed to JavaScript is not a complete serialized object. The code should receive some refactorings and would benefit from a better JSON library like gson or similar. Test would be nice too.
 
 ## Example App
 
 ![Screenshot](/example/screenshot/screenshot.jpg?raw=true "Screenshot of Example App")
 
-An example app for Android (made with cordova 5.4.1) was added to the project. The app shows basic usage of the plugin. 
-
+An example app for Android (made with cordova 5.4.1) was added to the project. The app shows basic usage of the plugin.
 
 # iOS
 
@@ -235,22 +243,22 @@ A basic implementation could look like:
 
 ```js
 window.handleOpenURL = function (url) {
-    window.resolveLocalFileSystemURI (
-        url, 
-        function (fileEntry) {
-            fileEntry.file (
-                function (file) {
-                    console.log ('Successfully received file: ' + file.name);
-                },
-                function (error) {
-                    console.log (error);
-                }
-            )
-        }, 
+  window.resolveLocalFileSystemURI(
+    url,
+    function (fileEntry) {
+      fileEntry.file(
+        function (file) {
+          console.log("Successfully received file: " + file.name);
+        },
         function (error) {
-            console.log(error);
-        }
-    )
+          console.log(error);
+        },
+      );
+    },
+    function (error) {
+      console.log(error);
+    },
+  );
 };
 ```
 
@@ -259,13 +267,13 @@ In order to get this working and make your app a "Open in"-Target on iOS, you ha
 ```xml
 <plist version="1.0">
     <dict>
-  
+
   <!-- whatever else -->
-  
-  
+
+
     <key>UIFileSharingEnabled</key>
     <true/>
-    
+
     <key>CFBundleDocumentTypes</key>
         <array>
             <dict>
@@ -296,5 +304,5 @@ In order to get this working and make your app a "Open in"-Target on iOS, you ha
             </dict>
         </array>
       </dict>
-</plist>    
+</plist>
 ```

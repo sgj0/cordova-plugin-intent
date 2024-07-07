@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-intent",
-  "version": "0.1.4",
+  "version": "0.1.3",
   "description": "Cordova Plugin for Android to access intent",
   "cordova": {
     "id": "net.sgj0.cordova.plugin.intent",
@@ -20,6 +20,12 @@
     "ecosystem:cordova",
     "cordova-android"
   ],
+  "scripts": {
+    "prettier": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.3.2"
+  },
   "author": "Axel Naolitano, Napolitano Business Solutions",
   "license": "MIT"
 }
