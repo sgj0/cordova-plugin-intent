@@ -8,6 +8,7 @@
       "android"
     ]
   },
+  "private": true,
   "repository": {
     "type": "git",
     "url": "https://github.com/sgj0/cordova-plugin-intent"
