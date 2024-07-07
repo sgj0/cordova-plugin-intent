@@ -3,14 +3,14 @@
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
         id="net.sgj0.cordova.plugin.intent"
-        version="0.1.4">
+        version="0.1.5">
 
     <name>IntentPlugin</name>
     <description>Cordova Plugin for Android to access intent</description>
     <license>MIT</license>
 
-    <repo>https://github.com/napolitano/cordova-plugin-intent</repo>
-    <issue>https://github.com/napolitano/cordova-plugin-intent/issues</issue>
+    <repo>https://github.com/sgj0/cordova-plugin-intent</repo>
+    <issue>https://github.com/sgj0/cordova-plugin-intent/issues</issue>
 
     <keywords>cordova,intent,share,send,android</keywords>
 
@@ -30,7 +30,7 @@
             <clobbers target="IntentPlugin" />
         </js-module>
 
-        <source-file src="src/android/IntentPlugin.java" target-dir="src/com/napolitano/cordova/plugin/intent" />
+        <source-file src="src/android/IntentPlugin.java" target-dir="src/net/sgj0/cordova/plugin/intent" />
 
     </platform>
 

@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-intent",
-  "version": "0.1.3",
+  "version": "0.1.5",
   "description": "Cordova Plugin for Android to access intent",
   "cordova": {
     "id": "net.sgj0.cordova.plugin.intent",
