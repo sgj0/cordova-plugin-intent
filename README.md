@@ -65,12 +65,14 @@ Setting the launch mode to "singleTask" ensures that your app cannot run in mult
 #### Example of MainActivity section in AndroidManifest.xml
 
 ```xml
-<activity android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
-          android:label="@string/activity_name"
-          android:launchMode="singleTask"
-          android:name="MainActivity"
-          android:theme="@android:style/Theme.Holo.Light"
-          android:windowSoftInputMode="adjustResize">
+<activity
+  android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
+  android:label="@string/activity_name"
+  android:launchMode="singleTask"
+  android:name="MainActivity"
+  android:theme="@android:style/Theme.Holo.Light"
+  android:windowSoftInputMode="adjustResize"
+>
 
     <intent-filter android:label="@string/launcher_name">
         <action android:name="android.intent.action.MAIN" />
@@ -92,7 +94,7 @@ Cordova >= 6.0.0 apparently requires the launchMode to be set in `config.xml` as
 ```xml
 <platform name="android">
     ...
-    <preference name="AndroidLaunchMode" value="singleTask"/>
+    <preference name="AndroidLaunchMode" value="singleTask" />
 </platform>
 ```
 
@@ -272,7 +274,7 @@ In order to get this working and make your app a "Open in"-Target on iOS, you ha
 
 
     <key>UIFileSharingEnabled</key>
-    <true/>
+    <true />
 
     <key>CFBundleDocumentTypes</key>
         <array>
