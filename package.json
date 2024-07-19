@@ -21,12 +21,6 @@
     "ecosystem:cordova",
     "cordova-android"
   ],
-  "scripts": {
-    "prettier": "prettier --write ."
-  },
-  "devDependencies": {
-    "prettier": "^3.3.2"
-  },
   "author": "Axel Naolitano, Napolitano Business Solutions",
   "license": "MIT"
 }
