@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-intent",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Cordova Plugin for Android to access intent",
   "cordova": {
     "id": "net.sgj0.cordova.plugin.intent",
@@ -8,11 +8,7 @@
       "android"
     ]
   },
-  "private": true,
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/sgj0/cordova-plugin-intent"
-  },
+  "repository": "github:sgj0/cordova-plugin-intent",
   "keywords": [
     "cordova",
     "intent",
