@@ -18,17 +18,17 @@
 		<config-file target="res/xml/config.xml" parent="/*">
 			<feature name="IntentPlugin">
 				<param
-          name="android-package"
-          value="net.sgj0.cordova.plugin.intent.IntentPlugin"
-        />
+					name="android-package"
+					value="net.sgj0.cordova.plugin.intent.IntentPlugin"
+				/>
 			</feature>
 		</config-file>
 		<js-module src="www/android/IntentPlugin.js" name="IntentPlugin">
 			<clobbers target="IntentPlugin" />
 		</js-module>
 		<source-file
-      src="src/android/IntentPlugin.java"
-      target-dir="src/net/sgj0/cordova/plugin/intent"
-    />
+			src="src/android/IntentPlugin.java"
+			target-dir="src/net/sgj0/cordova/plugin/intent"
+		/>
 	</platform>
 </plugin>
