@@ -1,51 +1,27 @@
-function IntentPlugin() {
-  "use strict";
-}
+const exec = require("cordova/exec");
 
-IntentPlugin.prototype.getCordovaIntent = function (
-  successCallback,
-  failureCallback,
-) {
-  "use strict";
+module.exports = {
+  getCordovaIntent: (successCallback, failureCallback) => {
+    return exec(
+      successCallback,
+      failureCallback,
+      "IntentPlugin",
+      "getCordovaIntent",
+      [],
+    );
+  },
 
-  return cordova.exec(
-    successCallback,
-    failureCallback,
-    "IntentPlugin",
-    "getCordovaIntent",
-    [],
-  );
+  setNewIntentHandler: (method) => {
+    exec(method, null, "IntentPlugin", "setNewIntentHandler", [method]);
+  },
+
+  getRealPathFromContentUrl: (uri, successCallback, failureCallback) => {
+    exec(
+      successCallback,
+      failureCallback,
+      "IntentPlugin",
+      "getRealPathFromContentUrl",
+      [uri],
+    );
+  },
 };
-
-IntentPlugin.prototype.setNewIntentHandler = function (method) {
-  "use strict";
-
-  cordova.exec(method, null, "IntentPlugin", "setNewIntentHandler", [method]);
-};
-
-IntentPlugin.prototype.getRealPathFromContentUrl = function (
-  uri,
-  successCallback,
-  failureCallback,
-) {
-  "use strict";
-
-  cordova.exec(
-    successCallback,
-    failureCallback,
-    "IntentPlugin",
-    "getRealPathFromContentUrl",
-    [uri],
-  );
-};
-
-var intentInstance = new IntentPlugin();
-module.exports = intentInstance;
-
-// Make plugin work under window.plugins
-if (!window.plugins) {
-  window.plugins = {};
-}
-if (!window.plugins.intent) {
-  window.plugins.intent = intentInstance;
-}
