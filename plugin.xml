@@ -23,8 +23,8 @@
 				/>
 			</feature>
 		</config-file>
-		<js-module src="www/android/IntentPlugin.js" name="IntentPlugin">
-			<clobbers target="IntentPlugin" />
+		<js-module src="www/android/intent.js" name="IntentPlugin">
+			<clobbers target="cordova.plugins.intent" />
 		</js-module>
 		<source-file
 			src="src/android/IntentPlugin.java"
