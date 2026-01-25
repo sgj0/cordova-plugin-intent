@@ -75,9 +75,29 @@ public class IntentPlugin extends CordovaPlugin {
     }
 
     Intent intent = cordova.getActivity().getIntent();
+    if (
+      intent == null ||
+      intent.hasExtra("already_processed") ||
+      intent.getAction() == null
+    ) {
+      context.sendPluginResult(
+        new PluginResult(PluginResult.Status.OK, (String) null)
+      );
+      return true;
+    }
+
     context.sendPluginResult(
       new PluginResult(PluginResult.Status.OK, getIntentJson(intent))
     );
+
+    intent.setAction("");
+    intent.setData(null);
+    intent.setClipData(null);
+    if (intent.getExtras() != null) {
+      intent.getExtras().clear();
+    }
+    intent.putExtra("already_processed", true);
+
     return true;
   }
 
@@ -114,6 +134,8 @@ public class IntentPlugin extends CordovaPlugin {
    */
   @Override
   public void onNewIntent(Intent intent) {
+    this.cordova.getActivity().setIntent(intent);
+
     if (this.onNewIntentCallbackContext != null) {
       PluginResult result = new PluginResult(
         PluginResult.Status.OK,
@@ -121,6 +143,8 @@ public class IntentPlugin extends CordovaPlugin {
       );
       result.setKeepCallback(true);
       this.onNewIntentCallbackContext.sendPluginResult(result);
+
+      intent.putExtra("already_processed", true);
     }
   }
 
@@ -134,8 +158,9 @@ public class IntentPlugin extends CordovaPlugin {
     JSONObject intentJSON = null;
     ClipData clipData = null;
     JSONObject[] items = null;
-    ContentResolver cR =
-      this.cordova.getActivity().getApplicationContext().getContentResolver();
+    ContentResolver cR = this.cordova.getActivity()
+      .getApplicationContext()
+      .getContentResolver();
     MimeTypeMap mime = MimeTypeMap.getSingleton();
 
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -258,8 +283,9 @@ public class IntentPlugin extends CordovaPlugin {
       );
       return false;
     }
-    ContentResolver cR =
-      this.cordova.getActivity().getApplicationContext().getContentResolver();
+    ContentResolver cR = this.cordova.getActivity()
+      .getApplicationContext()
+      .getContentResolver();
     Cursor cursor = null;
     try {
       String[] proj = { MediaStore.Images.Media.DATA };
